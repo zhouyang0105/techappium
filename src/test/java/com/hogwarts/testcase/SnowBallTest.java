@@ -1,10 +1,13 @@
 package com.hogwarts.testcase;
 
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
 import org.junit.jupiter.api.Test;
+import org.junit.platform.engine.discovery.UriSelector;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -57,4 +60,43 @@ public class SnowBallTest extends BaseTest{
         }
     }
 
+    /**
+     * 1.6 高级定位技巧-xpath定位
+     * //*[@text=09988]/../../..//*[@resource-id='com.xueqiu.android:id/current_price']
+     */
+    @Test
+    public void  priceTest(){
+
+        driver.findElement(By.id("com.xueqiu.android:id/home_search")).click();
+        driver.findElement(By.id("com.xueqiu.android:id/search_input_text")).sendKeys("阿里巴巴");
+        driver.findElement(By.xpath("//*[@text='BABA']")).click();
+        System.out.println(driver.findElement(By.xpath("//*[@text=09988]/../../..//*[@resource-id='com.xueqiu.android:id/current_price']")).getText());
+    }
+
+    /**
+     * 1.6 高级定位技巧--uiautomator定位
+     * resourceId("com.xueqiu.android:id/tab_name").text("交易")
+     *
+     * resourceId("com.xueqiu.android:id/scroll_view").childSelector(text("热门"))   -- 父找子
+     */
+    @Test
+    public void uiautomatorSelectorTest(){
+        AndroidDriver<MobileElement> driver = (AndroidDriver<MobileElement>) this.driver;
+
+        driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.xueqiu.android:id/tab_name\").text(\"交易\")"); //打开雪球，点击交易
+    }
+
+    /**
+     * 1.6 高级定位技巧--滚动查找元素
+     */
+    @Test
+    public void scrollTest() throws  Exception{
+        AndroidDriver<MobileElement> driver = (AndroidDriver<MobileElement>) this.driver;
+
+        Thread.sleep(1000); //等待页面加载10s
+
+        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView( new UiSelector().text(\"查找的文本\").instance(0))\n").click();
+        //new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView( new UiSelector().text("查找的文本").instance(0));
+
+    }
 }
