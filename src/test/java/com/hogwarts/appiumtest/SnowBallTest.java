@@ -1,4 +1,4 @@
-package com.hogwarts.testcase;
+package com.hogwarts.appiumtest;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -7,7 +7,6 @@ import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
 import org.junit.jupiter.api.Test;
-import org.junit.platform.engine.discovery.UriSelector;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -70,7 +69,8 @@ public class SnowBallTest extends BaseTest{
         driver.findElement(By.id("com.xueqiu.android:id/home_search")).click();
         driver.findElement(By.id("com.xueqiu.android:id/search_input_text")).sendKeys("阿里巴巴");
         driver.findElement(By.xpath("//*[@text='BABA']")).click();
-        System.out.println(driver.findElement(By.xpath("//*[@text=09988]/../../..//*[@resource-id='com.xueqiu.android:id/current_price']")).getText());
+        System.out.println(
+                driver.findElement(By.xpath("//*[@text=09988]/../../..//*[@resource-id='com.xueqiu.android:id/current_price']")).getText());
     }
 
     /**

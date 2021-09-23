@@ -1,22 +1,22 @@
-package com.hogwarts.testcase;
+package com.hogwarts.appiumtest;
 
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class ToastTest {
+/**
+ * 1.5触屏手势密码锁
+ */
+public class SwipeUnlockTest {
 
-    public static AppiumDriver driver;
-    public static WebDriverWait wait;
+    private static AndroidDriver driver;
 
     @BeforeAll
     public static void setUp(){
@@ -28,9 +28,9 @@ public class ToastTest {
             caps.setCapability("udid","emulator-5554");
             caps.setCapability("deviceName","xxxx"); //随便填 ，不写会报错
             //caps.setCapability("noReset","true"); //没有弹窗
-            //caps.setCapability("automationName","UiAutomator2");
-            caps.setCapability("appPackage","com.mumu.launcher");
-            caps.setCapability("appActivity","com.mumu.launcher.Launcher");
+            caps.setCapability("automationName","UiAutomator2");
+            caps.setCapability("appPackage","com.xueqiu.android");    //修改成手势密码锁的
+            caps.setCapability("appActivity",".view.WelcomeActivityAlias");  //修改成手势密码锁的
 
             driver = new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), caps); //测试android 手机
             driver.manage().timeouts().implicitlyWait(600, TimeUnit.SECONDS); //隐式等待 10s，服务器端等待
@@ -39,15 +39,21 @@ public class ToastTest {
         }
     }
 
-
     @Test
-    public void toastTest(){
-        driver.findElement(By.xpath("//*[@text='Make a Popup!']")).click();
-        System.out.println(driver.getPageSource());
+    public void swipeUnlockTest(){
 
-        driver.findElement(By.xpath("//*[@text='search']")).click();
+        try {
+            TouchAction touchAction = new TouchAction(driver);
 
-        System.out.println(driver.findElement(By.xpath("//*[@class='android.widget.Toast']")).getText());
-        System.out.println(driver.getPageSource());
+            Duration duration = Duration.ofMillis(5000); //3s
+
+            Thread.sleep(3000);// 防止页面还没有渲染出来，就进行滑动操作
+
+
+
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 }

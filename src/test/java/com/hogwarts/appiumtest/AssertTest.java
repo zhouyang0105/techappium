@@ -1,4 +1,4 @@
-package com.hogwarts.testcase;
+package com.hogwarts.appiumtest;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
