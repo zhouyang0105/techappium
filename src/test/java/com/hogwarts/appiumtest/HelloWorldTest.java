@@ -80,5 +80,7 @@ public class HelloWorldTest {
        // driver.findElement(By.xpath("//*[@text='BABA']")).click();
       //  System.out.println(driver.findElement(By.id("current_price")).getText());
     }
+
+
     
 }
